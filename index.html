@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Job Listings</title>
+    <style>
+      .jobs {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 20px;
+      }
+
+      .job {
+        width: calc(33.33% - 20px);
+        background: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 40px;
+      }
+
+      .job h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+
+      .job p {
+        font-size: 16px;
+        color: #999;
+        margin-bottom: 10px;
+      }
+
+      .search-container {
+        margin: 20px;
+      }
+
+      .search-container input[type="text"] {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search for jobs..." />
+    </div>
+
+    <div class="jobs" id="jobs">
+      <!-- Job listings will be inserted here -->
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-database.js"></script>
+
+    <script type="module">
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyDQkQSS3ZGNLKvzy-6Rz6ZgIphm8FFR9xA",
+        authDomain: "chatgpt-49c3e.firebaseapp.com",
+        databaseURL: "https://chatgpt-49c3e.firebaseio.com",
+        projectId: "chatgpt-49c3e",
+        storageBucket: "chatgpt-49c3e.appspot.com",
+        messagingSenderId: "129627169728",
+        appId: "1:129627169728:web:ab8a62fecfc35b70c1de25",
+        measurementId: "G-8EGZ70FZNC",
+      };
+      firebase.initializeApp(firebaseConfig);
+
+      var database = firebase.database();
+
+database.ref("jobs").once("value", function (snapshot) {
+  var jobs = snapshot.val();
+  console.log(jobs);
+
+  // Get the search input field and the jobs container
+  const searchInput = document.getElementById("searchInput");
+  const jobsContainer = document.getElementById("jobs");
+
+  // Listen for changes to the search input field
+  searchInput.addEventListener("input", function () {
+    // Get the search query
+    const searchQuery = this.value.toLowerCase();
+
+    // Clear the jobs container
+    jobsContainer.innerHTML = "";
+
+    // Iterate through the job listings and display only the ones that match the search query
+    for (var job in jobs) {
+      var jobTitle = jobs[job].title;
+      var jobLocation = jobs[job].location;
+
+      if (jobTitle.toLowerCase().includes(searchQuery) || jobLocation.toLowerCase().includes(searchQuery)) {
+        // Create a job element
+        const jobElement = document.createElement("div");
+        jobElement.classList.add("job");
+
+        // Add the job title
+        const jobTitleElement = document.createElement("h2");
+        jobTitleElement.textContent = jobTitle;
+        jobElement.appendChild(jobTitleElement);
+
+        // Add the job location
+        const jobLocationElement = document.createElement("p");
+        jobLocationElement.textContent = jobLocation;
+        jobElement.appendChild(jobLocationElement);
+
+        // Add the job element to the jobs container
+        jobsContainer.appendChild(jobElement);
+      }
+    }
+  });
+});
+      </script>
+      </body>
+      </html>

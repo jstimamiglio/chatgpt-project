@@ -1,0 +1,28 @@
+/* Basic styles for the page */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  header h1 {
+    margin: 0;
+  }
+  main {
+    padding: 20px;
+  }
+  /* Style for job listings */
+  li {
+    background-color: #f2f2f2;
+    margin-bottom: 10px;
+    padding: 20px;
+  }
+  h3 {
+    margin: 0;
+  }
+  

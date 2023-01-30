@@ -1,0 +1,19 @@
+{
+    "jobs": [
+  {
+    "title": "Software Engineer",
+    "description": "We are looking for a software engineer to join our team. The ideal candidate will have experience in developing web applications and a strong knowledge of JavaScript.",
+    "location": "San Francisco, CA"
+  },
+  {
+    "title": "Product Manager",
+    "description": "We are seeking a product manager to join our team. The successful candidate will have experience in product management and a passion for creating great products.",
+    "location": "New York, NY"
+  },
+  {
+    "title": "Data Scientist",
+    "description": "We are in need of a data scientist to join our team. The ideal candidate will have experience in data analysis and machine learning.",
+    "location": "London, UK"
+  }
+] 
+} 
